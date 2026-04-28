@@ -25,29 +25,28 @@
 
 <img width="1591" height="345" alt="image" src="https://github.com/user-attachments/assets/a245494c-fad6-43d6-bd90-66c547b6ec3f" />
 
-Задание 6.3
-Тестирование защиты документации (режим DEV)
-<img width="1690" height="912" alt="image" src="https://github.com/user-attachments/assets/b34a547d-cc82-4cfd-9413-577429c9d46d" />
+Задание 6.3 DEV-режим
+<img width="327" height="122" alt="image_2026-04-27_20-17-15" src="https://github.com/user-attachments/assets/596174d3-2cb7-481e-a17c-ec38ab3707d1" />
 
-При вводе неправильных данных
-<img width="1887" height="881" alt="image" src="https://github.com/user-attachments/assets/99d6ad63-2e3d-4319-a7fd-74777eeeb51c" />
+/docs без авторизации
+<img width="797" height="374" alt="image_2026-04-27_20-18-24" src="https://github.com/user-attachments/assets/86fbe9aa-33ae-4d92-97ef-0b7db1b1f8e7" />
 
-Вход с правильными данными
-<img width="1887" height="881" alt="image" src="https://github.com/user-attachments/assets/8c28cb28-9fe2-4fa0-88be-fa554d419a3d" />
+/docs с авторизацией
+<img width="944" height="441" alt="image_2026-04-27_20-33-18" src="https://github.com/user-attachments/assets/bb7fa222-d58e-4afd-8d53-6c5a557d0400" />
 
-Эндпоинт /redoc скрыт
-<img width="443" height="212" alt="image" src="https://github.com/user-attachments/assets/a1f16b3d-f3dd-4fe7-b8c4-70ab01437cc2" />
+DEV-режим redoc
+<img width="244" height="104" alt="image_2026-04-27_20-42-48" src="https://github.com/user-attachments/assets/c1708b62-cdcb-46fc-8de7-9ad66be3898d" />
 
-Тестирование в режиме (PROD)
+Dev-режим openapi.json (должна быть авторизация)
+<img width="799" height="346" alt="image_2026-04-27_20-43-35" src="https://github.com/user-attachments/assets/55af567e-e25c-4750-a7d4-df4aaba5ddd7" />
 
-Эндпоинты 
-Документация отключена
-<img width="526" height="243" alt="image" src="https://github.com/user-attachments/assets/55b050a9-e358-4380-aedb-f389d9f16b52" />
+Проверка prod режима
+<img width="328" height="118" alt="image_2026-04-27_20-45-35" src="https://github.com/user-attachments/assets/b36bdca4-da3a-44b9-89aa-ff41e173f52c" />
 
-openapi.json и /redoc эндпоинты полностью скрыты
-<img width="445" height="162" alt="image" src="https://github.com/user-attachments/assets/100fe614-f407-491a-b31e-66646fa0d27f" />
-
-<img width="432" height="169" alt="image" src="https://github.com/user-attachments/assets/d070487d-dc82-4016-a7d0-94f82fa2fcd7" />
+Все / скрыты
+<img width="267" height="102" alt="image_2026-04-27_20-46-18" src="https://github.com/user-attachments/assets/2fc18afa-de32-4946-8e01-47af09ae10a1" />
+<img width="291" height="111" alt="image_2026-04-27_20-46-54" src="https://github.com/user-attachments/assets/06b42a14-eb28-4dbe-aa2d-d7aeb664e032" />
+<img width="323" height="116" alt="image_2026-04-27_20-47-27" src="https://github.com/user-attachments/assets/62b13ad3-2259-4712-a56d-b683e2daf0ae" />
 
 Задание 6.4
 
