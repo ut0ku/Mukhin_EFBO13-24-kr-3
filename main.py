@@ -10,7 +10,6 @@ from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 from database import get_db_connection
 
-# --- Конфигурация окружения ---
 class Settings(BaseSettings):
     MODE: str = "DEV"
     DOCS_USER: str = "admin"
@@ -24,16 +23,14 @@ settings = Settings()
 if settings.MODE not in ("DEV", "PROD"):
     raise ValueError(f"Недопустимое значение MODE: {settings.MODE}. Ожидалось 'DEV' или 'PROD'")
 
-# Отключаем стандартные эндпоинты документации, чтобы переопределить их или скрыть (в PROD)
 app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 security = HTTPBasic()
 
-# --- Настройка Rate Limiter (ограничение запросов) ---
 limiter = Limiter(key_func=get_remote_address)
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-# --- Раздел: Защита документации (в DEV-режиме) ---
+# Защита документации (в DEV-режиме)
 def auth_docs(credentials: HTTPBasicCredentials = Depends(security)):
     correct_username = secrets.compare_digest(credentials.username, settings.DOCS_USER)
     correct_password = secrets.compare_digest(credentials.password, settings.DOCS_PASSWORD)
@@ -47,7 +44,6 @@ def auth_docs(credentials: HTTPBasicCredentials = Depends(security)):
 
 if settings.MODE == "DEV":
     
-    # Кастомный защищенный маршрут для Swagger UI
     @app.get("/docs", include_in_schema=False)
     def custom_swagger_ui_html(username: str = Depends(auth_docs)):
         return get_swagger_ui_html(
@@ -56,10 +52,42 @@ if settings.MODE == "DEV":
             oauth2_redirect_url=app.swagger_ui_oauth2_redirect_url,
         )
 
-    # Кастомный защищенный маршрут для схемы OpenAPI
     @app.get("/openapi.json", include_in_schema=False)
     def get_openapi_endpoint(username: str = Depends(auth_docs)):
         return app.openapi()
+
+    # Скрытие ReDoc в DEV-режиме
+    @app.get("/redoc", include_in_schema=False)
+    def redoc_hidden():
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, 
+            detail="ReDoc is hidden in DEV mode"
+        )
+
+elif settings.MODE == "PROD":
+    @app.get("/docs", include_in_schema=False)
+    @app.get("/redoc", include_in_schema=False)
+    def docs_not_found():
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, 
+            detail="Documentation not available in production mode"
+        )
+        
+    @app.get("/openapi.json", include_in_schema=False)
+    def openapi_not_found():
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, 
+            detail="OpenAPI schema not available in production mode"
+        )
+
+@app.get("/")
+def read_root():
+    return {
+        "message": "Приложение работает!", 
+        "mode": settings.MODE, 
+        "docs_available": settings.MODE == "DEV"
+    }
+
 
 
 # --- 1. Создание моделей данных ---
